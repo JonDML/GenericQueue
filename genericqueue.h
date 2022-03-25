@@ -58,10 +58,15 @@ Queue_##TYPE* create_queue_##TYPE() \
     return q; \
 }\
 \
+void clear_queue_##TYPE(Queue_##TYPE* q) \
+{\
+    while(NULL != q->front) Queue_pop_##TYPE(q, NULL);\
+}\
+\
 int destroy_queue_##TYPE(Queue_##TYPE* q) \
 {\
     if(NULL == q) return -1;\
-    while(NULL != q->front) Queue_pop_##TYPE(q, NULL);\
+    clear_queue_##TYPE(q);\
     free(q); \
     q = NULL; \
     return 0; \
